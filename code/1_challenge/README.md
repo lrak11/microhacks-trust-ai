@@ -7,7 +7,7 @@ Contoso Electronics is piloting an internal HR Q&A application where employees c
 
 ## Tools & Config Needed
 
-1. Microsoft Foundry Classic Portal (General Available)
+1. Microsoft Foundry New Portal (General Available)
 
 1. Azure AI Search (Indexed Data)
 
