@@ -18,7 +18,7 @@ In Challenge 2, participants take the role of a DevOps/AI engineer in charge of 
 
 1. [Azure AI Foundry Red Teaming Agent](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/run-scans-ai-red-teaming-agent?view=foundry-classic). The goal is to simulate a "red team" attack by programmatically running an agent to break the rules on the local development environment.
 
-1. Ensure the New Foundry Control Switch in the header of the Foundry Portal is switched to "OFF".  All challenges are using Foundry V1 portal "Classic". Foundry V2 portal is in Preview.
+1. Ensure the New Foundry Control Switch in the header of the Foundry Portal is switched to "OFF".  All challenges are using Foundry "new" portal experience not "Classic". 
 
 </br>
 
