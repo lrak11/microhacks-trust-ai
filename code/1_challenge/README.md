@@ -7,11 +7,11 @@ Contoso Electronics is piloting an internal HR Q&A application where employees c
 
 ## Tools & Config Needed
 
-1. Microsoft Foundry Classic Portal (General Available)
+1. Microsoft Foundry Portal 
 
 1. Azure AI Search (Indexed Data)
 
-1. Azure OpenAI model deployment (GPT-4.1-mini, GPT-4o and text-embedding-3-large)
+1. Azure OpenAI model deployment (gpt-5.4-mini, gpt-5.1, and text-embedding-3-large)
 
 1. Ground truth Q&A list (JSONL file or Synthetic Data Generation)
 
@@ -61,7 +61,7 @@ Business users and developers have been working conceptually on a use case but a
 
     ![Alt text](/media/CH1_CompareModels_v2.png "Compare Models")
 
-1. Navigate back to the ```Models``` view and select  ``Model leaderboard``. Scroll down to "Trade-off chart"and add gpt-5.4-mini and gpt-5.1 to the selected models. Observe how they compare on various metrics, and which model would be leveraged for different tasks and why based on capabilities.
+1. Navigate back to the ```Models``` view and select  ``View leaderboard``. Scroll down to "Trade-off chart"and add gpt-5.4-mini and gpt-5.1 to the selected models. Observe how they compare on various metrics, and which model would be leveraged for different tasks and why based on capabilities.
 
     ![Alt text](/media/CH1_LeaderboardChart_v2.png "Leaderboard Chart")
 
@@ -69,25 +69,20 @@ Business users and developers have been working conceptually on a use case but a
 
 ### Lab 1.1.2 – Instructions for Agent Evaluation
 
-1. Go to the command line terminal in codespaces and submit this script to build an agent.  
-
-    ```bash
-    python ./scripts/03_create_agent.py
-    ```
-
-1. Select the ```Build``` tab, then navigate to ```Deployments``` from the lefthand tab and click into the gpt-5.1 model to enter the Playground view.
 
 
-    ![Alt text](/media/CH1_NewPlayground_v2.png "Agent Playground")
+1. Select the ```Build``` tab, then navigate to ```Agents``` from the lefthand tab and click ``New Agent``, and select ``Build an Agent``. 
 
 
-1. Define the system message for the new Agent in the Instructions section. A good example is ```You must answer only HR benefits—related questions such as leave policies, PTO, parental leave, insurance, perks, holidays, and HR processes.```
+    ![Alt text](/media/CH1_NewAgent_v2.png "Agent Playground")
 
-1. Select ```Save Agent``` in the upper right-hand view. Give your agent a unique name, and select "Create and open in playground".
+1. Give your agent a unique name, then select ``Create and open playground``. 
 
+   ![Alt text](/media/CH1_OpenPlayground_v2.png "Agent Playground")
 
+1. Ensure the model is set to gpt-5.1, then define the system message for the new Agent in the Instructions section. A good example is ```You must answer only HR benefits—related questions such as leave policies, PTO, parental leave, insurance, perks, holidays, and HR processes.```
 
-    ![Alt text](/media/CH1_SaveAgent_v2.png "Agent Playground")
+1. Select ```Save Agent``` in the upper right-hand view. 
 
 1. Setup the knowledge base by selecting the ```Knowledge``` tab on the left-hand navigation bar. You will want to leverage Azure AI Search as the data source.  
 
@@ -107,6 +102,9 @@ Business users and developers have been working conceptually on a use case but a
 
 
     ![Alt text](/media/CH1_AddKnowledgeBase_v2.png "IndexSetup")
+1. Since we will not be leveraging web data as a knowledge source for our agent, navigate to "Tools" and click on the three ellipses to remove ``Web search``. After removing Web search, save your agent by selecting ``Save`` in the upper right-hand corner.
+
+    ![Alt text](/media/CH1_RemoveWebSearch_v2.png "Remove Web Search")
 1. Test your agent- Ask some sample questions, available here - (https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/evals/ground_truth.jsonl)
 
     ![Alt text](/media/CH1_TestQuestions_v2.png "Agent Chat")
@@ -198,18 +196,20 @@ Configure guardrail policies and run automated evaluations in Microsoft Foundry 
 
 ### Lab 1.3.1 – Instructions
 
-1. Create a guardrail policy- https://learn.microsoft.com/en-us/azure/ai-foundry/control-plane/quickstart-create-guardrail-policy?view=foundry&viewFallbackFrom=foundry-classic
+1. Understand how to create a guardrail policy: [Create a Guardrail Policy](https://learn.microsoft.com/en-us/azure/ai-foundry/control-plane/quickstart-create-guardrail-policy?view=foundry&viewFallbackFrom=foundry).
 
-    ![Alt text](/media/CH1_Operate.png "Guardrails")
 
-1. Click on ```Content Filters``` above the Guardrails and controls banner. Click the Create content filter button
 
-    ![Alt text](/media/CH1_ContentFilter.png "ContentFilter")
+1. To create a guardrail, select the ```Build``` tab, then navigate to ```Guardrails``` from the lefthand tab, then select ``Create`` in the upper right corner.
 
-1. Setup the Content filter thru the wizard.  It will ask you for Input filters, output filters and connection.  Review and accept the default settings. Here is a review of the setup. Click Create filter
+    ![Alt text](/media/CH1_GuardrailsTab_v2.png "ContentFilter")
 
-    ![Alt text](/media/CH1_Reviews.png "ContentFilterReview")
+1. Setup the new Guardrail through the wizard.  Note the ability to adjust the intervention point and action.  Review and accept the default settings, then hit "Next". Here is a review of the setup. 
 
+    ![Alt text](/media/CH1_GuardrailDefaults_v2.png "ContentFilterReview")
+1. Select your newly created agent and apply the guardrail to the gpt-5.1 and gpt-5.4-mini deployments, then select ``Next``. Review the configuration and select ``Create``. 
+
+    ![Alt text](/media/CH1_ApplyGuardrail_v2.png "ContentFilterReview")
 ---
 
 ## Success Criteria
@@ -235,7 +235,7 @@ As we wrap up the prototyping phase for Microsoft Foundry projects, the guiding 
 
 ## Learning Resources
 
-[Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry-classic)
+[Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry)
 
 [Microsoft Foundry Control Plane](https://learn.microsoft.com/en-us/azure/ai-foundry/control-plane/overview?view=foundry)
  
