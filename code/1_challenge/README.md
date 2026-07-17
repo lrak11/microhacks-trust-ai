@@ -7,11 +7,11 @@ Contoso Electronics is piloting an internal HR Q&A application where employees c
 
 ## Tools & Config Needed
 
-1. Microsoft Foundry Classic Portal (General Available)
+1. Microsoft Foundry Portal 
 
 1. Azure AI Search (Indexed Data)
 
-1. Azure OpenAI model deployment (GPT-4.1-mini, GPT-4o and text-embedding-3-large)
+1. Azure OpenAI model deployment (gpt-5.4-mini, gpt-5.1, and text-embedding-3-large)
 
 1. Ground truth Q&A list (JSONL file or Synthetic Data Generation)
 
@@ -49,61 +49,73 @@ Business users and developers have been working conceptually on a use case but a
 
     ![Alt text](/media/CH1_Foundry.png "Foundry Project")
 
-1. Ensure your Foundry portal is in classic mode and you are at the Foundry project interface.  
+1. Ensure your Foundry portal is in new mode and you are at the Foundry project interface. Select the ```Discover``` tab at the top of the screen.
 
-    ![Alt text](/media/CH1_FoundryClassic.png "Foundry Project Classic")
+    ![Alt text](/media/CH1_FoundryNew_v2.png "Foundry Project New")
 
-1. Click on Model Catalog to inspect the models available to you.  For this Microhack we are leveraging three models, gpt-4.1-mini, gpt-4o and text-embedding-3-large.  Go into model catalog to review their model cards to understand what use cases they support.  Click on details and go into benchmarks.
+1. Click on Models to inspect the models available to you. For this Microhack we are leveraging three models, gpt-5.4-mini, gpt-5.1 and text-embedding-3-large. Search gpt-5.4-mini and select the model to understand what use cases it supports. Select the ```Benchmarks``` tab to view the benchmarks for that model.
 
-    ![Alt text](/media/CH1_MCatalog.png "Foundry Model Catalog")
+    ![Alt text](/media/CH1_ModelCatalog_v2.png "Foundry Model Catalog")
 
-1. For benchmarks tab, click on ```Compare with more models``` and remove all models that are not part of this hack and add the extra one that is missing. The benchmark chart should look like this.
+1. From the benchmarks tab, click on ```Compare models``` and remove all models that are not part of this hack and add the non-embeddings models. 
 
-    ![Alt text](/media/CH1_Benchmarks.png "Model Benchmarks")
+    ![Alt text](/media/CH1_CompareModels_v2.png "Compare Models")
 
-1. Identify which model will be used for model evaluations, chat application and search engine based on the results of this benchmark test and why based on capabilities.
+1. Navigate back to the ```Models``` view and select  ``View leaderboard``. Scroll down to "Trade-off chart"and add gpt-5.4-mini and gpt-5.1 to the selected models. Observe how they compare on various metrics, and which model would be leveraged for different tasks and why based on capabilities.
 
-    ![Alt text](/media/CH1_ModelGrid.png "Model Grid")
+    ![Alt text](/media/CH1_LeaderboardChart_v2.png "Leaderboard Chart")
 
 ---
 
 ### Lab 1.1.2 – Instructions for Agent Evaluation
 
-1. Go to the command line terminal in codespaces and submit this script to build an agent.  
 
-    ```bash
-    python ./scripts/03_create_agent.py
-    ```
 
-1. Click on Playgrounds and select the Agent playground from the menus
+1. Select the ```Build``` tab, then navigate to ```Agents``` from the lefthand tab and click ``New Agent``, and select ``Build an Agent``. 
 
-    ![Alt text](/media/CH1_Playground.png "Agent Playground")
 
-1. A screen will appear called Agent Playground.  Select the gpt-4.1-mini model for your chat application as discussed in model selection.
+    ![Alt text](/media/CH1_NewAgent_v2.png "Agent Playground")
 
-    ![Alt text](/media/Ch1_modeldeployment.png "Model Deployment")
+1. Give your agent a unique name, then select ``Create and open playground``. 
 
-1. Define the system message for the Agent in the Instructions section.  A good example is ```You must answer only HR benefits—related questions such as leave policies, PTO, parental leave, insurance, perks, holidays, and HR processes.```
+   ![Alt text](/media/CH1_OpenPlayground_v2.png "Agent Playground")
 
-1. Setup the knowledge base by clicking the Add button.  You will want to leverage Azure AI Search as the data source.  
+1. Ensure the model is set to gpt-5.1, then define the system message for the new Agent in the Instructions section. A good example is ```You must answer only HR benefits—related questions such as leave policies, PTO, parental leave, insurance, perks, holidays, and HR processes.```
 
-    ![Alt text](/media/CH1_knowledgebase.png "Azure Search")
+1. Select ```Save Agent``` in the upper right-hand view. 
 
-1. Lastly, it will ask you to connect to an index already in the project.  There is only one option for Project index and for Search type choose semantic.  The reason for one option is due to the project connections.  Please name the index ```hrdocs```
+1. Setup the knowledge base by selecting the ```Knowledge``` tab on the left-hand navigation bar. You will want to leverage Azure AI Search as the data source.  
 
-    ![Alt text](/media/CH1_IndexSetup.png "IndexSetup")
+    ![Alt text](/media/CH1_AddSource_v2.png "Azure Search")
 
+1. Select ``Create a new knowledge base``, then select gpt-5.1 as the Chat completions model. Leave all other settings as default, then select ``Add sources`` under ``Knowledge sources``.
+
+
+    ![Alt text](/media/CH1_AddSource_v2.png "Knowledge Source")
+
+1. Select "Azure AI Search Index", then select the "documents" search index and press "Create".
+
+
+    ![Alt text](/media/CH1_AddSearchIndex_v2.png "Add Index")
+
+1. Navigate back to "Agents" via the lefthand tab, then click into your agent and scroll down to "Knowledge". Click "Add", and add your newly created knowledge base.
+
+
+    ![Alt text](/media/CH1_AddKnowledgeBase_v2.png "IndexSetup")
+1. Since we will not be leveraging web data as a knowledge source for our agent, navigate to "Tools" and click on the three ellipses to remove ``Web search``. After removing Web search, save your agent by selecting ``Save`` in the upper right-hand corner.
+
+    ![Alt text](/media/CH1_RemoveWebSearch_v2.png "Remove Web Search")
 1. Test your agent- Ask some sample questions, available here - (https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/evals/ground_truth.jsonl)
 
-    ![Alt text](/media/CH1_Agentchat.png "Agent Chat")
+    ![Alt text](/media/CH1_TestQuestions_v2.png "Agent Chat")
 
-1. Compare the results with your ground truth data to see if agent is able to answer your questions sufficiently.  There is also an AI quality score for coherence, fluency and relevance which an AI Judge scores and provides a reason code in the Agent Playground.
+1. Compare the results with your ground truth data to see if agent is able to answer your questions sufficiently.  There is also an AI quality score for fluency, relevance, and task adherence which an AI Judge scores and provides a reason code in the Agent Playground. Hover over ``AI Quality`` to view these scores.
 
-    ![Alt text](/media/CH_1_Agent_Manual_eval.png "Agent Playground Eval Score")
+    ![Alt text](/media/CH1_AIQuality_v2.png "Agent Playground Eval Score")
 
-1. Click on View Run Info button next to Tools in the same menu as AI quality.  This will share the thread for the question.  On the far right click on the evaluations header to see the actual score for each quality evaluator and an explanation.  Run a few questions to see if you have the right model and the results are acceptable.  This helps you run manual evaluations to approve your prototype for development.
+1. Click into "AI Quality" to view the run details. This will share the thread for the question. The evaluations tab will also show the actual score for each quality evaluator and an explanation. Run a few questions to see if you have the right model and the results are acceptable. This helps you run manual evaluations to approve your prototype for development.
 
-    ![Alt text](/media/CH_Trace_eval.png "Agent Score & Reason code in Trace")
+    ![Alt text](/media/CH1_ViewRunInfo_v2.png "Agent Score & Reason code in Trace")
 
 ---
 
@@ -184,18 +196,20 @@ Configure guardrail policies and run automated evaluations in Microsoft Foundry 
 
 ### Lab 1.3.1 – Instructions
 
-1. Create a guardrail policy- https://learn.microsoft.com/en-us/azure/ai-foundry/control-plane/quickstart-create-guardrail-policy?view=foundry&viewFallbackFrom=foundry-classic
+1. Understand how to create a guardrail policy: [Create a Guardrail Policy](https://learn.microsoft.com/en-us/azure/ai-foundry/control-plane/quickstart-create-guardrail-policy?view=foundry&viewFallbackFrom=foundry).
 
-    ![Alt text](/media/CH1_Operate.png "Guardrails")
 
-1. Click on ```Content Filters``` above the Guardrails and controls banner. Click the Create content filter button
 
-    ![Alt text](/media/CH1_ContentFilter.png "ContentFilter")
+1. To create a guardrail, select the ```Build``` tab, then navigate to ```Guardrails``` from the lefthand tab, then select ``Create`` in the upper right corner.
 
-1. Setup the Content filter thru the wizard.  It will ask you for Input filters, output filters and connection.  Review and accept the default settings. Here is a review of the setup. Click Create filter
+    ![Alt text](/media/CH1_GuardrailsTab_v2.png "ContentFilter")
 
-    ![Alt text](/media/CH1_Reviews.png "ContentFilterReview")
+1. Setup the new Guardrail through the wizard.  Note the ability to adjust the intervention point and action.  Review and accept the default settings, then hit "Next". Here is a review of the setup. 
 
+    ![Alt text](/media/CH1_GuardrailDefaults_v2.png "ContentFilterReview")
+1. Select your newly created agent and apply the guardrail to the gpt-5.1 and gpt-5.4-mini deployments, then select ``Next``. Review the configuration and select ``Create``. 
+
+    ![Alt text](/media/CH1_ApplyGuardrail_v2.png "ContentFilterReview")
 ---
 
 ## Success Criteria
@@ -221,7 +235,7 @@ As we wrap up the prototyping phase for Microsoft Foundry projects, the guiding 
 
 ## Learning Resources
 
-[Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry-classic)
+[Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry)
 
 [Microsoft Foundry Control Plane](https://learn.microsoft.com/en-us/azure/ai-foundry/control-plane/overview?view=foundry)
  
