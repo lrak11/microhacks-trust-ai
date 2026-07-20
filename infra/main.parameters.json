@@ -18,7 +18,7 @@
       "value": "${AZURE_EVAL_MODEL=gpt-5.1}"
     },
     "evalModelVersion": {
-      "value": "${AZURE_EVAL_MODEL_VERSION=2024-08-06}"
+      "value": "${AZURE_EVAL_MODEL_VERSION=2025-11-13}"
     },
     "embeddingModel": {
       "value": "${AZURE_EMBEDDING_MODEL=text-embedding-3-large}"
