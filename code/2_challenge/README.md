@@ -14,7 +14,7 @@ In Challenge 2, participants take the role of a DevOps/AI engineer in charge of 
 
 1. WAF & Security Compliance: The [Azure Review Checklist Spreadsheet](https://github.com/Azure/review-checklists/blob/main/spreadsheet/README.md) and [Azure Review Checklist Script](https://github.com/Azure/review-checklists/blob/main/scripts/checklist_graph.sh) on GitHub.
 
-1. Automated Quality & Safety evaluation python scripts will run on the local compute environment and save the results in the Microsoft Foundry Portal.  A gpt-4o model will be our AI Judge to help us score each metric and provide a reason code for the rating.  These results are viewable in the portal.
+1. Automated Quality & Safety evaluation python scripts will run on the local compute environment and save the results in the Microsoft Foundry Portal.  A gpt-5.1 model will be our AI Judge to help us score each metric and provide a reason code for the rating.  These results are viewable in the portal.
 
 
 1. [Azure AI Foundry Red Teaming Agent](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/run-scans-ai-red-teaming-agent?view=foundry-classic). The goal is to simulate a "red team" attack by programmatically running an agent to break the rules on the local development environment.
@@ -54,7 +54,7 @@ In Challenge 1, we tested our application with a small subset of questions and h
 
 1. Go to the command line terminal in codespaces and submit the following script to run quality metrics.  
 
-### Updated Evaluation Commands (New vs Classic Foundry)
+### Evaluation Commands
 
 For the **new Foundry experience**, use:
 
@@ -66,7 +66,7 @@ python ./scripts/07_run_evaltarget_new_portal.py
 
 1. For each metric, review the number of success and failures in the Foundry portal to see overall success rate.  There is one question which fails due to the ground truth data having a typo.  This is intentional but demonstrates the need to review your questoins & ground truth data before running evaluations.  The correct value should be $2,000.  Due to time skip any fixes but sharing for guidance.
 
-   ![Alt text](/media/ai-quality-ai-assisted-chart.png "AI Quality Metrics")
+   ![Alt text](/media/ai-quality-ai-assisted-chart_v2.png "AI Quality Metrics")
 
 1. For more information on quality evaluation scripts, read the [Quality Evaluation](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/docs/evaluation.md) file for RAGCHAT application.
 
@@ -85,7 +85,7 @@ python ./scripts/07_run_evaltarget_new_portal.py
  
 1. Evaluate the Safety metrics and share with the team to determine if they are acceptable.  
 
-    ![Alt text](/media/risk-and-safety-chart.png "AI Safety Metrics")
+    ![Alt text](/media/risk-and-safety-chart_v2.png "AI Safety Metrics")
 
 Automated Quality & Safety evaluations have validated our application meets our governance rules.  The last step is to determine if the application can handle adversarial attacks.
 
@@ -109,7 +109,7 @@ The AI Red Team Agent will be able to assess risk categories and attack strategi
 
 1. After the scan, review the results carefully. The baseline "Basic" scan will typically have an ASR (Attack Success Rate) of 0%, meaning the Red Team agent was unable to elicit harmful responses. If you enable the advanced scan (commented out in the script), you may see a higher ASR as more sophisticated attack strategies are applied. This demonstrates the importance of Red Teaming to ensure you run a thorough evaluation of your Generative AI application, giving you greater confidence that it is ready for a production environment.
 
-    ![Alt text](/media/ai-red-team-data.png "AI Red Team Results")
+    ![Alt text](/media/ai-red-team-data_v2.png "AI Red Team Results")
 
 </br>
 
