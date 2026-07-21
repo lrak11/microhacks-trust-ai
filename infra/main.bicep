@@ -24,10 +24,10 @@ param chatModelCapacity int = 100
 param embeddingModelCapacity int = 80
 
 @description('Eval model name')
-param evalModel string = 'gpt-4o'
+param evalModel string = 'gpt-5.1'
 
 @description('Eval model version')
-param evalModelVersion string = '2024-08-06'
+param evalModelVersion string = '2025-11-13'
 
 @description('Eval model capacity (tokens per minute in thousands)')
 param evalModelCapacity int = 100
